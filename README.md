@@ -34,6 +34,7 @@ Will cause logstash receive following over UDP:
 {
 	"@timestamp": "Date as ISO string here",
 	"type": "my-app-1",
+	"env": "NODE_ENV value here",
 	"source": "my-folder/my-module",
 	"level": "ERROR",
 	"message": "oh no! json: {\"everything\": \"is broken\"}, number: 1000, string: times"

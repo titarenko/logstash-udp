@@ -6,6 +6,7 @@ function sendMessage (appName, source, level, message) {
 	transport.send({
 		'@timestamp': new Date().toISOString(),
 		type: appName,
+		env: process.env.NODE_ENV || null,
 		source: source,
 		level: level,
 		message: utils.formatMessage.apply(utils, [message].concat(params))
