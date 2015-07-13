@@ -24,13 +24,13 @@ describe('logstash-udp', function () {
 				message.type.should.eql('tests');
 				message.source.should.eql('tests/index');
 				message.level.should.eql('ERROR');
-				message.message.should.eql('oh no! everything is very bad!');
+				message.message.should.eql('oh no! json: {"everything":"is broken"}, number: 1000, string: times');
 				server.close();
 				done();
 			});
 			logstash.init(socketParams);
 			var logger = logstash('tests/index');
-			logger.error('oh no! %s', 'everything is very bad!');
+			logger.error('oh no! json: %j, number: %d, string: %s', {everything: 'is broken'}, 1000, 'times');
 		});
 	});
 });

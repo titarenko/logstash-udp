@@ -1,13 +1,14 @@
 var transport = require('./transport');
 var utils = require('./utils');
 
-function sendMessage (appName, source, level, message, params) {
+function sendMessage (appName, source, level, message) {
+	var params = Array.prototype.slice.call(arguments, 4);
 	transport.send({
 		'@timestamp': new Date().toISOString(),
 		type: appName,
 		source: source,
 		level: level,
-		message: utils.formatMessage(message, params)
+		message: utils.formatMessage.apply(utils, [message].concat(params))
 	}, utils.logUnexpectedError);
 }
 
