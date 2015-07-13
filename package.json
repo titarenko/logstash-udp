@@ -1,0 +1,30 @@
+{
+  "name": "lsudp",
+  "version": "0.1.0",
+  "description": "Your log messages go to logstash UDP input (almost) without any overhead.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/titarenko/logstash-udp.git"
+  },
+  "keywords": [
+    "logstash",
+    "udp"
+  ],
+  "author": "Constantin Titarenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/titarenko/logstash-udp/issues"
+  },
+  "homepage": "https://github.com/titarenko/logstash-udp#readme",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.2"
+  }
+}
