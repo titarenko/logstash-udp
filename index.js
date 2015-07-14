@@ -9,7 +9,8 @@ function sendMessage (appName, source, level, message) {
 		env: process.env.NODE_ENV || null,
 		source: source,
 		level: level,
-		message: utils.formatMessage.apply(utils, [message].concat(params))
+		message: utils.formatMessage.apply(utils, [message].concat(params)),
+		data: utils.getNonRenderables.apply(utils, [message].concat(params))
 	}, utils.logUnexpectedError);
 }
 

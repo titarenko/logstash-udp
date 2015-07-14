@@ -1,6 +1,6 @@
 {
   "name": "lsudp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Your log messages go to logstash UDP input (almost) without any overhead.",
   "main": "index.js",
   "directories": {

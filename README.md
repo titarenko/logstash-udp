@@ -41,6 +41,20 @@ Will cause logstash receive following over UDP:
 }
 ```
 
+If you want to log structured data, then:
+
+```js
+logstash.warning('warning!', mydata);
+```
+
+Resulting message object will have `mydata` assigned as value of property `data`.
+
+This still works if you want to use placeholders inside message:
+
+```js
+logstash.debug('my %s message %d', 'formatted', 2, { my_custom: 'structured data' });
+```
+
 ## Notes
 
 If `lsudp` encounters transport level error, it will output it to `stderr` in stringified form.

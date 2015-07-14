@@ -21,6 +21,11 @@ function logUnexpectedError (error) {
 	}
 }
 
+function getPlaceholdersCount (message) {
+	var match = message.match(/%[djs]/g);
+	return match ? match.length : 0;
+}
+
 function formatMessage (message) {
 	var params = Array.prototype.slice.call(arguments, 1);
 	if (!params.length) {
@@ -29,15 +34,34 @@ function formatMessage (message) {
 		}
 		return message;
 	}
-	var formatted = util.format.apply(util, [message].concat(params));
-	if (message == formatted && params.length) {
-		return formatMessage(message + ' %j', params);
+	var count = getPlaceholdersCount(message);
+	return util.format.apply(util, [message].concat(params.slice(0, count)));
+}
+
+function getNonRenderables (message) {
+	var params = Array.prototype.slice.call(arguments, 1);
+	if (!params.length) {
+		return null;
 	}
-	return formatted;
+	var count = getPlaceholdersCount(message);
+	params = params.slice(count).filter(function (param) {
+		return param.toString() == "[object Object]";
+	});
+	if (!params.length) {
+		return null;
+	}
+	var result = {};
+	params.forEach(function (param) {
+		Object.getOwnPropertyNames(param).forEach(function (key) {
+			result[key] = param[key];
+		});
+	});
+	return result;
 }
 
 module.exports = {
 	stringifyError: stringifyError,
 	logUnexpectedError: logUnexpectedError,
-	formatMessage: formatMessage
+	formatMessage: formatMessage,
+	getNonRenderables: getNonRenderables
 };

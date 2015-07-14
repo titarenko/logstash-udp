@@ -20,4 +20,24 @@ describe('utils', function () {
 			}
 		});
 	});
+	describe('getNonRenderables', function () {
+		it('should return null if everything renders', function () {
+			should.not.exist(utils.getNonRenderables('abba %d', {a: 2}));
+		});
+		it('should return null if no params', function () {
+			should.not.exist(utils.getNonRenderables('abba %d'));
+		});
+		it('should omit arrays', function () {
+			should.not.exist(utils.getNonRenderables('abba %d', [1, 2, 3]));
+		});
+		it('should omit strings and numbers', function () {
+			should.not.exist(utils.getNonRenderables('abba %d', 1, 'aaa'));
+		});
+		it('should return all non-renderable params', function () {
+			var result = utils.getNonRenderables('abba %d', 1, 'aaa', {a: 'b'}, 'string', {d: 1});
+			result.should.have.properties(['a', 'd']);
+			result.a.should.eql('b');
+			result.d.should.eql(1);
+		});
+	});
 });
