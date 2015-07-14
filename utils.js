@@ -35,7 +35,11 @@ function formatMessage (message) {
 		return message;
 	}
 	var count = getPlaceholdersCount(message);
-	return util.format.apply(util, [message].concat(params.slice(0, count)));
+	var forPlaceholders = params.slice(0, count);
+	var forAppend = params.slice(count).filter(function (it) {
+		return it.toString() != '[object Object]';
+	});
+	return util.format.apply(util, [message].concat(forPlaceholders).concat(forAppend));
 }
 
 function getNonRenderables (message) {

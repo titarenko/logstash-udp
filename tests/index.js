@@ -42,7 +42,7 @@ describe('logstash-udp', function () {
 				should(message.env == (process.env.NODE_ENV || null));
 				message.source.should.eql('tests/index');
 				message.level.should.eql('WARNING');
-				message.message.should.eql('oh no! 1');
+				message.message.should.eql('oh no! 1 times');
 				message.data.should.eql({ everything: 'is broken', houston: 'we have a problem'});
 				server.close();
 				done();

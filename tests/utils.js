@@ -19,6 +19,9 @@ describe('utils', function () {
 				utils.formatMessage(error).should.startWith('{"stack":"Error: Bad thing happened!');
 			}
 		});
+		it('should append non-objects to message even there are no placeholders for them', function () {
+			utils.formatMessage('my message', '100s', 2).should.eql('my message 100s 2');
+		});
 	});
 	describe('getNonRenderables', function () {
 		it('should return null if everything renders', function () {
