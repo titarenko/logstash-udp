@@ -51,5 +51,18 @@ describe('logstash-udp', function () {
 			var logger = logstash('tests/index');
 			logger.warning('oh no! %d', 1, {everything: 'is broken'}, 'times', {houston: 'we have a problem'});
 		});
+		it('should should allow to call log root object (builder call result) as debug logger', function (done) {
+			var server = createFakeLogstashServer(function (data) {
+				var message = JSON.parse(data.toString());
+				message.type.should.eql('tests');
+				message.level.should.eql('DEBUG');
+				message.message.should.eql('wow! so debuge!');
+				server.close();
+				done();
+			});
+			logstash.init(socketParams);
+			var logger = logstash('tests/index');
+			logger('wow!', 'so debuge!');
+		});
 	});
 });

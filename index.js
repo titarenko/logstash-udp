@@ -15,11 +15,11 @@ function sendMessage (appName, source, level, message) {
 }
 
 function buildLogger (source) {
-	return {
-		debug: sendMessage.bind(this, appName, source, 'DEBUG'),
-		warning: sendMessage.bind(this, appName, source, 'WARNING'),
-		error: sendMessage.bind(this, appName, source, 'ERROR')
-	};
+	var debug = sendMessage.bind(this, appName, source, 'DEBUG'); 
+	debug.debug = sendMessage.bind(this, appName, source, 'DEBUG');
+	debug.warning = sendMessage.bind(this, appName, source, 'WARNING');
+	debug.error = sendMessage.bind(this, appName, source, 'ERROR');
+	return debug;
 }
 
 var appName;
