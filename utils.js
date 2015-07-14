@@ -49,7 +49,7 @@ function getNonRenderables (message) {
 	}
 	var count = getPlaceholdersCount(message);
 	params = params.slice(count).filter(function (param) {
-		return params && param.toString() == "[object Object]";
+		return param && param.toString() == "[object Object]";
 	});
 	if (!params.length) {
 		return null;
